@@ -69,7 +69,7 @@ The basic features for a recipe app will be covered and an extra nice to have fe
 there are 4 main component to keep track of (time taken):
 
 - Analysis and Assessment: ~ 1 hour
-- Backend
+- Backend: 2.5 hrs (bare minimum)
 - Frontend
 - Deployment
 

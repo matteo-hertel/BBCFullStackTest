@@ -1,0 +1,97 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="./components/recipe-card.html">
+
+<dom-module id="recipes-list">
+  <template>
+    <iron-ajax auto url="http://localhost:4300/recipes" handle-as="json" on-response="handleResponse" on-error="handleError"
+      debounce-duration="300" last-response={{recipes}}></iron-ajax>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding: 10px;
+        --paper-spinner-stroke-width: 5px;
+      }
+    </style>
+
+    <dom-if if="[[isLoading]]">
+      <template>
+        <div class="spinner-container">
+          <paper-spinner active id="spinner"></paper-spinner>
+        </div>
+      </template>
+    </dom-if>
+
+
+    <dom-if if="[[hasError]]">
+      <template>
+        <div class="card">
+          <p>Sorry, we currently have no recipes for you</p>
+        </div>
+      </template>
+    </dom-if>
+    <dom-if if="[[!hasError]]">
+      <template>
+
+        <dom-if if="[[recipes]]">
+          <template>
+            <dom-repeat items="[[recipes]]">
+              <template>
+                <recipe-card recipe="[[item]]"></recipe-card>
+              </template>
+            </dom-repeat>
+          </template>
+        </dom-if>
+
+
+
+      </template>
+
+    </dom-if>
+
+
+  </template>
+
+  <script>
+    class RecipesList extends Polymer.Element {
+      static get is() { return 'recipes-list'; }
+
+      static get properties() {
+        return {
+          isLoading: {
+            type: Boolean,
+            value: true
+          },
+          recipes: {
+            type: Object,
+            default: []
+          },
+          hasError: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+      handleError(e) {
+        console.log(e);
+      }
+      handleResponse() {
+        this.isLoading = false;
+      }
+    }
+
+    window.customElements.define(RecipesList.is, RecipesList);
+  </script>
+</dom-module>

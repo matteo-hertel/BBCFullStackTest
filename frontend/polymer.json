@@ -1,0 +1,23 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/recipes-app.html",
+  "fragments": [
+    "src/recipes-list.html",
+    "src/recipes-view.html",
+    "src/page-404.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  }
+}
