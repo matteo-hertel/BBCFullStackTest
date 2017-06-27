@@ -76,7 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="list" href="list">Recipes List</a>
+          <a name="list" href="/list">Recipes List</a>
         </iron-selector>
       </app-drawer>
 
@@ -89,11 +89,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div main-title>Recipes App</div>
           </app-toolbar>
         </app-header>
-
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="fallback" role="main">
           <recipes-list name="list" route={{routeData}}></recipes-list>
-          <recipes-view name="view" id="[[subroute]]"></recipes-view>
-
+          <recipes-view name="view" id="[[_getArticleID(subroute)]]" active=[[routeData.page]]></recipes-view>
           <recipes-fallback name="fallback"></recipes-fallback>
         </iron-pages>
       </app-header-layout>
@@ -115,6 +113,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           rootPattern: String,
           routeData: Object,
           subroute: String,
+          recipeId: {
+            type: Number,
+            computed: "_getArticleID(subroute)"
+          }
         };
       }
 
@@ -122,6 +124,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return [
           '_routePageChanged(routeData.page)',
         ];
+      }
+
+      _getArticleID(subroute) {
+        if (this.routeData.page !== "view") {
+          return 0;
+        }
+        return subroute.path.replace(/\//g, "");
       }
 
       constructor() {

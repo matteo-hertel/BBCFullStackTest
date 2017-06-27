@@ -9,23 +9,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="./components/recipe-fullview.html">
 
 <dom-module id="recipes-view">
   <template>
+    <iron-ajax id="recipeRequest" url="http://localhost:4300/recipes/[[id]]" handle-as="json" on-response="handleResponse" on-error="handleError"
+      debounce-duration="300" last-response={{recipe}}></iron-ajax>
     <style include="shared-styles">
        :host {
         display: block;
-
         padding: 10px;
+        --paper-spinner-stroke-width: 5px;
       }
     </style>
 
-    <div class="card">
-      <div class="circle">2</div>
-      <h1>View Two</h1>
-      [[id]]
-    </div>
+    <dom-if if="[[isLoading]]">
+      <template>
+        <div class="spinner-container">
+          <paper-spinner active id="spinner"></paper-spinner>
+        </div>
+      </template>
+    </dom-if>
+
+
+    <dom-if if="[[hasError]]">
+      <template>
+        <div class="card">
+          <p>Sorry, this recipe doesn't exist or may have been removed</p>
+        </div>
+      </template>
+    </dom-if>
+    <dom-if if="[[!hasError]]">
+      <template>
+
+        <dom-if if="[[recipe]]">
+          <recipe-fullview recipe="[[recipe]]"></recipe-fullview>
+        </dom-if>
+
+
+
+      </template>
+
+    </dom-if>
+
+
   </template>
 
   <script>
@@ -34,11 +64,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties() {
         return {
-          id: {
+          isLoading: {
+            type: Boolean,
+            value: true
+          },
+          recipe: {
             type: Object,
             default: {}
+          },
+          hasError: {
+            type: Boolean,
+            value: false
+          },
+          id: {
+            type: Number,
+            observer: "fetchArticle"
+          },
+          active: {
+            type: String,
+            value: false
           }
         };
+      }
+      formatJson(data) {
+        return JSON.stringify(data, null, 4)
+      }
+      fetchArticle(n, o) {
+        ;
+        if (n && this.active === "view") {
+          this.isLoading = true;
+          this.hasError = false;
+          return this.$.recipeRequest.generateRequest();
+        }
+        this.isLoading = false;
+        this.hasError = true;
+      }
+      handleError(e) {
+        this.isLoading = false;
+        this.hasError = true;
+
+      }
+      handleResponse() {
+        this.isLoading = false;
+      }
+
+      viewRecipe(e) {
+        this.dispatchEvent(new CustomEvent('pageChange', {
+          detail: {
+            page: 'view/' + e.model.item["$loki"]
+          },
+          bubbles: true,
+          composed: true
+        }));
       }
     }
 
