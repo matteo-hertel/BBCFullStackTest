@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="recipes-view">
   <template>
-    <iron-ajax id="recipeRequest" url="https://bbc-backend-test.matteohertel.com/[[id]]" handle-as="json" on-response="handleResponse"
+    <iron-ajax id="recipeRequest" url="https://bbc-backend-test.matteohertel.com/recipes/[[id]]" handle-as="json" on-response="handleResponse"
       on-error="handleError" debounce-duration="300" last-response={{recipe}}></iron-ajax>
     <style include="shared-styles">
        :host {
@@ -44,15 +44,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </dom-if>
     <dom-if if="[[!hasError]]">
       <template>
-
-        <dom-if if="[[recipe]]">
-          <recipe-fullview recipe="[[recipe]]"></recipe-fullview>
+        <dom-if if="[[!isLoading]]">
+          <dom-if if="[[recipe]]">
+            <recipe-fullview recipe="[[recipe]]"></recipe-fullview>
+          </dom-if>
         </dom-if>
 
-
-
       </template>
-
     </dom-if>
 
 
@@ -86,11 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         };
       }
-      formatJson(data) {
-        return JSON.stringify(data, null, 4)
-      }
       fetchArticle(n, o) {
-        ;
         if (n && this.active === "view") {
           this.isLoading = true;
           this.hasError = false;
@@ -106,6 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       handleResponse() {
         this.isLoading = false;
+        this.hasError = true;
       }
 
       viewRecipe(e) {
