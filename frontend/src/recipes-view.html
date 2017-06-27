@@ -16,8 +16,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="recipes-view">
   <template>
-    <iron-ajax id="recipeRequest" url="http://localhost:4300/recipes/[[id]]" handle-as="json" on-response="handleResponse" on-error="handleError"
-      debounce-duration="300" last-response={{recipe}}></iron-ajax>
+    <iron-ajax id="recipeRequest" url="https://bbc-backend-test.matteohertel.com/[[id]]" handle-as="json" on-response="handleResponse"
+      on-error="handleError" debounce-duration="300" last-response={{recipe}}></iron-ajax>
     <style include="shared-styles">
        :host {
         display: block;

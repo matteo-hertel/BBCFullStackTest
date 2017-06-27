@@ -19,7 +19,7 @@ module.exports = {
   navigateFallback: 'index.html',
   runtimeCaching: [
     {
-      urlPattern: /localhost/,
+      urlPattern: /bbc-backend-test.matteohertel.com/,
       handler: "networkFirst"
     },
     {
