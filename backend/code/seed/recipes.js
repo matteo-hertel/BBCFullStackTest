@@ -7,6 +7,7 @@ var children = db.addCollection('recipes')
 children.insert([
     {
         name: "Lemon Chicken",
+        "slug": "lemon-chicken",
         cookingtime: 30 * 60,
         ingredients: [
             "4 x Chicken Breasts",
@@ -17,7 +18,8 @@ children.insert([
         description: "Lemon chicken is the name of several dishes found in cuisines around the world which include chicken and lemon. In Canadian Chinese cuisine it usually consists of pieces of chicken meat that are sautéed or deep-fried and coated with a thick, sweet lemon-flavored sauce.[citation needed] The Chinese restaurant of the Panda Hotel in Tsuen Wan, Hong Kong, used to serve its version of Lemon Chicken with the chicken pieces coated in batter, then rolled in almond slivers and deep-fried, and served with the lemon-glaze sauce. Description from wikipedia"
     },
     {
-        name: "Lemon Chicken",
+        name: "Chicken Caesar Salad",
+        slug: "chicken-caesar-salad",
         cookingtime: 30 * 60,
         ingredients: [
             "3 cloves garlic",
@@ -35,4 +37,3 @@ children.insert([
     }
 ]);
 db.saveDatabase();
-// process.exit();
