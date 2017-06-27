@@ -1,6 +1,10 @@
 # BBC FullStack techical test
 Thanks to the BBC for letting me keep the code on github!
 
+I got a really good lighthouse score in the end, I'm really proud of that!
+
+![Lighthouse score!](./assets/lighthouse.png)
+
 # The challenge
 
 The application is a food / recipe application that will help users

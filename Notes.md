@@ -83,3 +83,17 @@ Because of the above constraint the app is lacking several things:
 the node backend is using `node index.js` to start the script, thats not reliable and needs a process manager like supervisord to run at best
 - monitoring, no monitoring of the apps has been added
 - logging, at the moment both FE and BE are logging to stout, that's not recommended, a better way is to have a centralised logging platform like logstash 
+
+# Final thoughts
+
+It was good fun taking on this challenge, I liked in particular the fact that it can reflect a real case scenario and there was no chosen tech stack.
+
+In the end I completed the whole task is a day worth of work, I implemented the backend and the frontend as I had estimated,
+and the quality of the end application is quite good, as extra exercise I wired the whole app in my CI/CD pipeline using gitlab and DC/OS
+
+Lighthouse settings for reference: 
+
+User agent: Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36(KHTML, like Gecko) Chrome/61.0.3116.0 Mobile Safari/537.36
+Device Emulation Nexus 5X: Enabled
+Network Throttling 562.5ms RTT, 1.4Mbps down, 0.7Mbps up: Enabled
+CPU Throttling 4x slowdown: Enabled
