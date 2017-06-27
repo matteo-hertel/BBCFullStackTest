@@ -2,6 +2,11 @@
  * The best use of Node 8 is for the async/await support, not many operation are 
  * asynchronous in thi simple app so let's mix together ES6 class generators and async await
  * to simulate a more real life scenario
+ * 
+ * As per the database, I went for a simple in memory DB, lokijs
+ * 
+ * Any relational/document oriented can be used so this model file will ensure consistent
+ * APIs in case of a storage switch
  */
 const loki = require("lokijs");
 const db = new loki('db.json');
@@ -12,6 +17,12 @@ class Recipes {
     constructor() {
         this.collection;
     }
+    /**
+     * Ensure that db is loaded and the collection reference is stored
+     * 
+     * @returns 
+     * @memberof Recipes
+     */
     async ensureLoadedDb() {
         return new Promise((resolve, reject) => {
             if (this.collection) {
@@ -28,7 +39,18 @@ class Recipes {
         let collection = await this.ensureLoadedDb();
         return collection.find();
     }
-
+    /**
+     * Get by ID will check:
+     * 
+     * is the ID valid?
+     * does the ID exists?
+     * 
+     * if not different error will be thrown for better error handling
+     * 
+     * @param {number} [id=0] 
+     * @returns object
+     * @memberof Recipes
+     */
     async getRecipeByID(id = 0) {
         if (!id) {
             let error = new HTTPError("getRecipeByID requires a valid ID");
@@ -39,7 +61,7 @@ class Recipes {
         let collection = await this.ensureLoadedDb();
 
         let recipe = collection.where((obj) => {
-            return obj["$loki"] == id;
+            return obj["$loki"] == id; //the $loki property is the auto increment ID
         });
 
         if (!recipe || !recipe.length) {
