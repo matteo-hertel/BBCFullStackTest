@@ -91,8 +91,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="fallback" role="main">
-          <recipes-list name="list"></recipes-list>
-          <recipes-view name="view"></recipes-view>
+          <recipes-list name="list" route={{routeData}}></recipes-list>
+          <recipes-view name="view" id="[[subroute]]"></recipes-view>
 
           <recipes-fallback name="fallback"></recipes-fallback>
         </iron-pages>
@@ -161,6 +161,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPagefallback() {
         this.page = 'fallback';
+      }
+      ready() {
+        super.ready();
+        this.addEventListeners();
+      }
+      addEventListeners() {
+        this.addEventListener('pageChange', (e) => {
+          if (!e.detail.page) {
+            return;
+          }
+          this.set("routeData.page", e.detail.page);
+        });
       }
     }
 

@@ -49,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <template>
             <dom-repeat items="[[recipes]]">
               <template>
-                <recipe-card recipe="[[item]]"></recipe-card>
+                <recipe-card on-click="viewRecipe" recipe="[[item]]"></recipe-card>
               </template>
             </dom-repeat>
           </template>
@@ -89,6 +89,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       handleResponse() {
         this.isLoading = false;
+      }
+
+      viewRecipe(e) {
+        this.dispatchEvent(new CustomEvent('pageChange', {
+          detail: {
+            page: 'view/' + e.model.item["$loki"]
+          },
+          bubbles: true,
+          composed: true
+        }));
       }
     }
 
