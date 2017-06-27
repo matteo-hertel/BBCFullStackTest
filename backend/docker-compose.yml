@@ -3,5 +3,8 @@ version: '2'
 services:
     backend:
         build: .
+        environment:
+            - NODE_ENV=production
+            - SERVER_PORT=3000
         ports:
-            - 3000:3000
+            - 4300:3000

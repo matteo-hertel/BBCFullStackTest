@@ -16,6 +16,4 @@ RUN rm -rf node_modules
 RUN yarn
 
 # Define default command.
-# CMD ["yarn", "serve"]
-ENTRYPOINT ["/bin/bash"]
-
+CMD ["yarn", "serve"]
