@@ -4,7 +4,7 @@
   "fragments": [
     "src/recipes-list.html",
     "src/recipes-view.html",
-    "src/page-404.html"
+    "src/recipes-fallback.html"
   ],
   "sources": [
     "src/**/*",
@@ -19,5 +19,11 @@
     "rules": [
       "polymer-2"
     ]
-  }
+  },
+  "builds": [
+    {
+      "name": "bundled",
+      "preset": "es5-bundled"
+    }
+  ]
 }

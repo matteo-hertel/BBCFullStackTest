@@ -17,4 +17,23 @@ module.exports = {
     '/bower_components/webcomponentsjs/*',
   ],
   navigateFallback: 'index.html',
+  runtimeCaching: [
+    {
+      urlPattern: /localhost/,
+      handler: "networkFirst"
+    },
+    {
+      urlPattern: /\//,
+      handler: "networkFirst"
+    },
+    {
+      urlPattern: /https:\/\/fonts.googleapis.com\/*/,
+      handler: "fastest"
+    }
+    ,
+    {
+      urlPattern: /https:\/\/cdn.matteohertel.com\/*/,
+      handler: "fastest"
+    }
+  ]
 };
