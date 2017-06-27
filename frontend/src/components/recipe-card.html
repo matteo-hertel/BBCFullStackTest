@@ -53,6 +53,10 @@ subject to an additional IP rights grant found at https://polymer.github.io/PATE
     </template>
 
     <script>
+        /**
+         * Single component to render a card summary of a recipe,
+         * stateless, it gets a property in and renders the data
+         */
         class RecipeCard extends Polymer.Element {
             static get is() { return 'recipe-card'; }
 

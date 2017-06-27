@@ -65,6 +65,17 @@ subject to an additional IP rights grant found at https://polymer.github.io/PATE
   </template>
 
   <script>
+    /**
+     * one of the biggest problem in a polymer app is the architecture of the async request
+     * the biggest challenge is to find a reliable and consistent way to make ajax calls
+     * there are two school of tought:
+     * 
+     * component should be stateless and something else shoul make http request for them
+     * each component should be responsible for its own data
+     * 
+     * there is no right or worng, the key is consistency if an app uses external mediator for fetching data
+     * it's good practice to stick with it
+     */
     class RecipesList extends Polymer.Element {
       static get is() { return 'recipes-list'; }
 
