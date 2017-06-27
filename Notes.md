@@ -71,8 +71,15 @@ there are 4 main component to keep track of (time taken):
 - Analysis and Assessment: 1 hour
 - Backend: 2.5 hrs (bare minimum)
 - Frontend: 4 hours (without filtering)
-- Deployment: 
+- Deployment: 2 hours for setting up CI/CD(not public but I'll be able to show everything in a follow up interview)
 
 
 ## Follow up and next phase
-not production ready, backend is using `node index.js` not reliable need a process manager
+
+Because of the above constraint the app is lacking several things:
+- missing feature from PM requirement, although the app has a solid foundation and the next iteration will be easier some features are still missing
+- test, both front end and backend are lacking test to ensure code maintainability 
+- production ready set up, both BE and FE are wired up to a CI/CD but some of the config are not production ready, for example
+the node backend is using `node index.js` to start the script, thats not reliable and needs a process manager like supervisord to run at best
+- monitoring, no monitoring of the apps has been added
+- logging, at the moment both FE and BE are logging to stout, that's not recommended, a better way is to have a centralised logging platform like logstash 
