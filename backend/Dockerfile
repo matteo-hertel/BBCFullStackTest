@@ -15,5 +15,7 @@ RUN rm -rf node_modules
 
 RUN yarn
 
+RUN yarn seed
+
 # Define default command.
 CMD ["yarn", "serve"]
