@@ -40,7 +40,7 @@ The following features are required:
     - Show only starred recipes
 
 The chosen tech stack will be:
-- Backend: Node.JS express powered application 
+- Backend: Node.JS express powered application (my personal boilerplate will be used, it adds logging and a folder structure that I like, also it's deployable out of the box)
 - FrontEnd: The app should work on mobile devices I would personally choose between two front end stacks: React + react native or a Polymer PWA, there are advantages and disadvantages in both but for this assignment ad Polymer PWA will be chosen
 - Ops: Both FE and BE will be housed in a docker container ready for the CD/CI pipeline, if I have the time I'll hook it up in my personal CD/CI pipeline ready to show in a follow up interview
 
@@ -72,3 +72,7 @@ there are 4 main component to keep track of (time taken):
 - Backend
 - Frontend
 - Deployment
+
+
+## Follow up and next phase
+not production ready, backend is using `node index.js` not reliable need a process manager

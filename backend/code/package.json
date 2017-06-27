@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "hint": "jshint --exclude node_modules ./",
+    "serve": "node index.js",
+    "preseed": "echo '' > db.json",
+    "seed": "node ./seed/recipes.js"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "helmet": "^3.4.0",
+    "lokijs": "^1.5.0",
+    "morgan": "^1.8.1",
+    "uuid": "^3.0.1",
+    "winston": "^2.3.1"
+  }
+}
